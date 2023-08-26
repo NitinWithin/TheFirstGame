@@ -23,6 +23,7 @@ public:
 
 	virtual void Tick(float DeltaTime) override;
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+	virtual void Jump() override;
 
 protected:
 	virtual void BeginPlay() override;
@@ -38,10 +39,22 @@ protected:
 		
 	UPROPERTY(EditAnywhere, Category = Input)
 	UInputAction* JumpAction;
+	
+	UPROPERTY(EditAnywhere, Category = Input)
+	UInputAction* EquipAction;
+	
+	UPROPERTY(EditAnywhere, Category = Input)
+	UInputAction* AttackAction;
+	
+	UPROPERTY(EditAnywhere, Category = Input)
+	UInputAction* DodgeAction;
 
 	void Move(const FInputActionValue& Value);
-
 	void Look(const FInputActionValue& Value);
+	void Equip();
+	void Dodge();
+
+	//virtual void Attack() override;
 
 private:
 

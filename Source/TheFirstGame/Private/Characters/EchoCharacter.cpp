@@ -1,6 +1,5 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-
 #include "Characters/EchoCharacter.h"
 
 #include "Components/InputComponent.h"
@@ -55,7 +54,6 @@ void AEchoCharacter::BeginPlay()
 			Subsystem->AddMappingContext(EchoContext, 0);
 		}
 	}
-	
 }
 
 void AEchoCharacter::Move(const FInputActionValue& Value)
@@ -80,11 +78,24 @@ void AEchoCharacter::Look(const FInputActionValue& Value)
 	AddControllerPitchInput(LookAxisVector.Y);
 }
 
+void AEchoCharacter::Equip()
+{
+}
+
+void AEchoCharacter::Dodge()
+{
+}
+
+
 // Called every frame
 void AEchoCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+}
 
+void AEchoCharacter::Jump()
+{
+	Super::Jump();
 }
 
 // Called to bind functionality to input
@@ -97,5 +108,8 @@ void AEchoCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 		EnhancedInputComponent->BindAction(MovementAction, ETriggerEvent::Triggered, this, &AEchoCharacter::Move);
 		EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &AEchoCharacter::Look);
 		EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Triggered, this, &AEchoCharacter::Jump);
+		EnhancedInputComponent->BindAction(EquipAction, ETriggerEvent::Triggered, this, &AEchoCharacter::Equip);
+		//EnhancedInputComponent->BindAction(AttackAction, ETriggerEvent::Triggered, this, &AEchoCharacter::Attack);
+		EnhancedInputComponent->BindAction(DodgeAction, ETriggerEvent::Triggered, this, &AEchoCharacter::Dodge);
 	}
 }
