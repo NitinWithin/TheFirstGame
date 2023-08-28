@@ -78,13 +78,9 @@ void AEchoCharacter::Look(const FInputActionValue& Value)
 	AddControllerPitchInput(LookAxisVector.Y);
 }
 
-void AEchoCharacter::Equip()
-{
-}
+void AEchoCharacter::Equip() {}
 
-void AEchoCharacter::Dodge()
-{
-}
+void AEchoCharacter::Dodge() {}
 
 
 // Called every frame
