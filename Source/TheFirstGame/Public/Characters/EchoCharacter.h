@@ -12,6 +12,7 @@ class UInputAction;
 class USpringArmComponent;
 class UCameraComponent;
 class UGroomComponent;
+class AMyActorTestFinal;
 
 UCLASS()
 class THEFIRSTGAME_API AEchoCharacter : public ACharacter
@@ -69,4 +70,11 @@ private:
 	
 	UPROPERTY(VisibleAnywhere, Category = Hair)
 	UGroomComponent* Eyebrows;
+
+	UPROPERTY(VisibleInstanceOnly)
+	AMyActorTestFinal* OverlappingItem;
+
+public:
+
+	FORCEINLINE void SetOverlappingItem(AMyActorTestFinal* Item) { OverlappingItem = Item; }
 };

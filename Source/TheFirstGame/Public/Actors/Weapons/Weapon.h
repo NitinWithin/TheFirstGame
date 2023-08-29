@@ -13,6 +13,9 @@ UCLASS()
 class THEFIRSTGAME_API AWeapon : public AMyActorTestFinal
 {
 	GENERATED_BODY()
+
+public:
+	void Equip(USceneComponent*	InParent, FName InSocketName);
 	
 protected:
 

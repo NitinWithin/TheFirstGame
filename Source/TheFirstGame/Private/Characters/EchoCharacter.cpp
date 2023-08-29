@@ -14,6 +14,9 @@
 
 #include "GroomComponent.h"
 
+#include "Actors/MyActorTestFinal.h"
+#include "Actors/Weapons/Weapon.h"
+
 // Sets default values
 AEchoCharacter::AEchoCharacter()
 {
@@ -78,9 +81,19 @@ void AEchoCharacter::Look(const FInputActionValue& Value)
 	AddControllerPitchInput(LookAxisVector.Y);
 }
 
-void AEchoCharacter::Equip() {}
+void AEchoCharacter::Equip() 
+{
+	AWeapon* OverlappingWeapon = Cast<AWeapon>(OverlappingItem);
+	if (OverlappingWeapon)
+	{
+		OverlappingWeapon->Equip(GetMesh(), FName("RightHandSocket"));
+	}
+}
 
-void AEchoCharacter::Dodge() {}
+void AEchoCharacter::Dodge() 
+{
+
+}
 
 
 // Called every frame
