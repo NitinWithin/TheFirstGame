@@ -52,13 +52,11 @@ protected:
 
 	void Move(const FInputActionValue& Value);
 	void Look(const FInputActionValue& Value);
-	void Equip();
+	void EquipItems();
 	void Dodge();
-
 	//virtual void Attack() override;
 
 private:
-
 	UPROPERTY(VisibleAnywhere)
 	USpringArmComponent* SpringArmForCamera;
 
@@ -75,6 +73,5 @@ private:
 	AMyActorTestFinal* OverlappingItem;
 
 public:
-
 	FORCEINLINE void SetOverlappingItem(AMyActorTestFinal* Item) { OverlappingItem = Item; }
 };
