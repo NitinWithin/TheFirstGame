@@ -1,7 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-
 #include "Actors/MyActorTestFinal.h"
+#include "Characters/EchoCharacter.h"
 #include "TheFirstGame/DebugMacros.h"
 #include "Components/SphereComponent.h"
 
@@ -16,7 +16,6 @@ AMyActorTestFinal::AMyActorTestFinal()
 
 	CollisionSphere = CreateDefaultSubobject<USphereComponent>(TEXT("CollisionSphere"));
 	CollisionSphere->SetupAttachment(GetRootComponent());
-
 }
 
 // Called when the game starts or when spawned
@@ -54,24 +53,19 @@ float AMyActorTestFinal::TransformedCos()
 
 void AMyActorTestFinal::OnSphereBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	const FString OtherActorName = OtherActor->GetName();
-
-	if (GEngine)
+	AEchoCharacter* EchoCharacter = Cast<AEchoCharacter>(OtherActor);
+	if (EchoCharacter)
 	{
-		GEngine->AddOnScreenDebugMessage(1, 30.f, FColor::Red, OtherActorName);
-
-		UE_LOG(LogTemp, Warning, TEXT("PRINTING TO OUTPUT"));
+		EchoCharacter->SetOverlappingItem(this);
 	}
 }
 
 void AMyActorTestFinal::OnSphereEndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
 {
-	const FString OtherActorName = OtherActor->GetName();
-
-	if (GEngine)
+	AEchoCharacter* EchoCharacter = Cast<AEchoCharacter>(OtherActor);
+	if (EchoCharacter)
 	{
-		GEngine->AddOnScreenDebugMessage(1, 30.f, FColor::Red, OtherActorName);
-		UE_LOG(LogTemp, Warning, TEXT("PRINTING TO OUTPUT END OVERLAP"));
+		EchoCharacter->SetOverlappingItem(nullptr);
 	}
 }
 
@@ -82,10 +76,8 @@ void AMyActorTestFinal::Tick(float DeltaTime)
 
 	RunningTime += DeltaTime;
 
-	float DeltaZ = Amplitude * FMath::Sin(RunningTime * 5.f);
-	float RoatateZ = Amplitude * FMath::Cos(RunningTime * 0.5f);
-
-	AddActorWorldOffset(FVector(0.f, 0.f, DeltaZ));
-	//AddActorWorldRotation(FRotator(0.f, 0.f, RoatateZ));
-	
+	//Code for hovering item up and down
+	//AddActorWorldOffset(FVector(0.f, 0.f, TransformedSin()));
+	// Code for rotating item
+	//AddActorWorldRotation(FRotator(0.f, 0.f, TransformedCos()));
 }
