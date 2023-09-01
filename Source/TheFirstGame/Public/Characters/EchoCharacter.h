@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "InputActionValue.h"
+#include "CharacterTypes.h"
 #include "EchoCharacter.generated.h"
 
 class UInputMappingContext;
@@ -24,7 +25,6 @@ public:
 
 	virtual void Tick(float DeltaTime) override;
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
-	virtual void Jump() override;
 
 protected:
 	virtual void BeginPlay() override;
@@ -52,11 +52,14 @@ protected:
 
 	void Move(const FInputActionValue& Value);
 	void Look(const FInputActionValue& Value);
+	virtual void Jump() override;
 	void EquipItems();
 	void Dodge();
 	//virtual void Attack() override;
 
 private:
+	ECharacterState CharacterState = ECharacterState::ECS_Unequipped;
+
 	UPROPERTY(VisibleAnywhere)
 	USpringArmComponent* SpringArmForCamera;
 
@@ -74,4 +77,5 @@ private:
 
 public:
 	FORCEINLINE void SetOverlappingItem(AMyActorTestFinal* Item) { OverlappingItem = Item; }
+	FORCEINLINE ECharacterState GetCharacterState() const { return CharacterState; }
 };

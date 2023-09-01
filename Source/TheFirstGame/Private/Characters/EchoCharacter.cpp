@@ -81,6 +81,12 @@ void AEchoCharacter::Look(const FInputActionValue& Value)
 void AEchoCharacter::EquipItems() 
 {
 	AWeapon* OverlappingWeapon = Cast<AWeapon>(OverlappingItem);
+	if (OverlappingWeapon)
+	{
+		OverlappingWeapon->Equip(GetMesh(), FName("RightHandSocket"));
+		CharacterState = ECharacterState::ECS_EquippedOneHandWeapon;
+	}
+
 }
 
 void AEchoCharacter::Dodge() 
